@@ -5,13 +5,11 @@
 //  Created by rfsouto on 6/3/24.
 //
 import Foundation
-import Combine
+import Observation
 
-
-class ContentViewModel: ObservableObject {
-    @Published var isMenuOpen = false
-
-    @Published
+@Observable
+final class ContentViewModel {
+    var isMenuOpen = false
     var option: BarOptions = BarOptions.firstTab {
         didSet {
             if option == BarOptions.menuButton {
@@ -22,7 +20,6 @@ class ContentViewModel: ObservableObject {
             }
         }
     }
-    
+    @ObservationIgnored
     private var originalOption: BarOptions = BarOptions.firstTab
 }
-

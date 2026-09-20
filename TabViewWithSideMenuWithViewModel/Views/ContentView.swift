@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
 
-    @StateObject var viewModel: ContentViewModel = ContentViewModel()
+    @State private var viewModel = ContentViewModel()
     
     
     var body: some View {
@@ -18,7 +18,8 @@ struct ContentView: View {
                 get: { viewModel.option },
                 set: { selectedOption in viewModel.option = selectedOption }
             )) {
-                
+            // Variante B (sustituye la línea de arriba, Binding manual = variante A):
+            // TabView(selection: $viewModel.option) {
                 Color(red: 216/255, green: 67/255, blue: 82/255) // Rojo
                     .tabItem {
                         Image(systemName: "circle.fill")

@@ -17,6 +17,7 @@ Ejemplo SwiftUI (TabView + SlideMenu + `ContentViewModel`) usado para ilustrar l
 | `main` | v2 más UI test, README y TESTING. |
 | `observable-migration` | Apunta al mismo commit que `v2-observable`. |
 | `lazy-state-experiment` | `main` más `RootView` y un contador de inicializaciones del ViewModel (en pantalla y con `os.Logger`), con `@State`. |
+| `lazy-state-classes` | `lazy-state-experiment` más dos sondas en `RootView`: `@State` con una clase `@Observable` y `@State` con una clase `ObservableObject`. |
 | `lazy-baseline-stateobject` | `v1-observableobject` más el mismo `RootView` y contador, con `@StateObject`. |
 
 ## Cómo abrir el proyecto

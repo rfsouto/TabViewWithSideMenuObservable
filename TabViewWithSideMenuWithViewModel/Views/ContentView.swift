@@ -21,24 +21,28 @@ struct ContentView: View {
             // Variante B (sustituye la línea de arriba, Binding manual = variante A):
             // TabView(selection: $viewModel.option) {
                 Color(red: 216/255, green: 67/255, blue: 82/255) // Rojo
+                    .accessibilityIdentifier("content-first")
                     .tabItem {
                         Image(systemName: "circle.fill")
                         Text("First")
                     }
                     .tag(BarOptions.firstTab)
                 Color(red: 251/255, green: 176/255, blue: 59/255) // Amarillo
+                    .accessibilityIdentifier("content-second")
                     .tabItem {
                         Image(systemName: "circle.fill")
                         Text("Second")
                     }
                     .tag(BarOptions.secondTab)
                 Color(red: 63/255, green: 143/255, blue: 204/255) // Azul
+                    .accessibilityIdentifier("content-third")
                     .tabItem {
                         Image(systemName: "circle.fill")
                         Text("Third")
                     }
                     .tag(BarOptions.thirdTab)
                 Color(red: 40/255, green: 167/255, blue: 71/255) // Verde
+                    .accessibilityIdentifier("content-menu")
                     .tabItem {
                         Image(systemName: "circle.fill")
                         Text("Menu")

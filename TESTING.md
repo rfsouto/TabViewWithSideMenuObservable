@@ -35,4 +35,19 @@ Ramas: `lazy-state-experiment` (`@State`) y `lazy-baseline-stateobject` (`@State
 2. Sobre el botón "Incrementar (N)" aparece `inits: K`, el número de veces que se ha construido `ContentViewModel`. El valor se refresca unas 4 veces por segundo.
 3. Anota K tras arrancar. Pulsa "Incrementar" 3 veces y anota K otra vez.
 4. Comprobación cruzada en la consola de Xcode (⇧⌘C): filtra por `ContentViewModel init`. Cada línea lleva su número, emitida con `os.Logger` (categoría `experiment`).
-5. Compara las dos ramas. Con `@StateObject` el inicializador va en un autoclosure; con `@State` se evalúa en cada construcción de `ContentView()`.
+5. Compara las dos ramas.
+
+### Resultados medidos (UI test `InitCountUITests`)
+
+Compilado con el SDK de Xcode 27 (iOS Simulator 27.0), ejecutado en cada runtime. Valores `inits` tras arrancar → tras 3 pulsaciones de "Incrementar":
+
+| Runtime | `lazy-state-experiment` (`@State`) | `lazy-baseline-stateobject` (`@StateObject`) |
+|---|---|---|
+| iOS 17.2 | 1 → 1 | 1 → 1 |
+| iOS 18.6 | 1 → 1 | 1 → 1 |
+| iOS 26.2 | 1 → 1 | 1 → 1 |
+| iOS 27.0 | 1 → 1 | 1 → 1 |
+
+Es decir, en este entorno no se observa diferencia entre `@State` y `@StateObject`: el ViewModel se construye una sola vez.
+Control positivo: si `RootView` construye a propósito un `ContentViewModel` extra en cada `body`, el contador da 2 → 5, así que la medición detecta las reconstrucciones y `RootView.body` se reevalúa en cada pulsación.
+Los valores dependen de la versión de compilador y SDK; repite la medición si cambias de Xcode.

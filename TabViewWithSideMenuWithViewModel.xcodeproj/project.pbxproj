@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		43C257A63A23673B6324DE3A /* InitCountUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E4383B4BC2646A6719F45A /* InitCountUITests.swift */; };
 		9D5A0D4CCC9F5CF335789C23 /* MenuTabUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D6C6D226CEE1189830CB12 /* MenuTabUITests.swift */; };
 		FE1414F92B9920FA00505227 /* TabViewWithSideMenuWithViewModelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1414F82B9920FA00505227 /* TabViewWithSideMenuWithViewModelApp.swift */; };
 		FE1414FB2B9920FA00505227 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1414FA2B9920FA00505227 /* ContentView.swift */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		B9D6C6D226CEE1189830CB12 /* MenuTabUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MenuTabUITests.swift; sourceTree = "<group>"; };
+		E7E4383B4BC2646A6719F45A /* InitCountUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = InitCountUITests.swift; sourceTree = "<group>"; };
 		FE1414F52B9920FA00505227 /* TabViewWithSideMenuWithViewModel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TabViewWithSideMenuWithViewModel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE1414F82B9920FA00505227 /* TabViewWithSideMenuWithViewModelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewWithSideMenuWithViewModelApp.swift; sourceTree = "<group>"; };
 		FE1414FA2B9920FA00505227 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				B9D6C6D226CEE1189830CB12 /* MenuTabUITests.swift */,
+				E7E4383B4BC2646A6719F45A /* InitCountUITests.swift */,
 			);
 			name = TabViewWithSideMenuWithViewModelUITests;
 			path = TabViewWithSideMenuWithViewModelUITests;
@@ -297,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D5A0D4CCC9F5CF335789C23 /* MenuTabUITests.swift in Sources */,
+				43C257A63A23673B6324DE3A /* InitCountUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

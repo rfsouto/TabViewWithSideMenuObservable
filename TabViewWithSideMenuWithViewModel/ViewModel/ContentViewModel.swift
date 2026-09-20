@@ -6,9 +6,18 @@
 //
 import Foundation
 import Observation
+import os
 
 @Observable
 final class ContentViewModel {
+    private static let logger = Logger(subsystem: "com.rfsouto.TabViewWithSideMenuWithViewModel", category: "experiment")
+    private(set) static var initCount = 0
+
+    init() {
+        Self.initCount += 1
+        Self.logger.notice("ContentViewModel init #\(Self.initCount)")
+    }
+
     var isMenuOpen = false
     var option: BarOptions = BarOptions.firstTab {
         didSet {

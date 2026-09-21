@@ -32,7 +32,7 @@ TSV=${RESULTS_TSV:-$ROOT/results/raw.tsv}; LOGS=${LOGS_DIR:-$ROOT/results/logs}
 mkdir -p "$(dirname "$TSV")" "$LOGS"
 [ -f "$TSV" ] || printf 'fecha\tmodo\tref\tsha\tvariante\txcode\tswift\tsdk\truntime\tdispositivo\titeraciones\tpasa\tfalla\tdetalle\n' > "$TSV"
 XVER=$(xcodebuild -version | tr '\n' ' ' | sed 's/ *$//')
-SWIFTV=$(xcrun swiftc --version 2>&1 | head -1)
+SWIFTV=$(xcrun swiftc --version 2>&1 | grep -m1 'Apple Swift version')
 SDKV=iOS-$(xcrun --sdk iphonesimulator --show-sdk-version)
 SHA=$(git rev-parse --short "$REF")
 XTAG=$(basename "$XCODE" .app)
@@ -60,9 +60,10 @@ for RT in $RUNTIMES; do
     continue
   fi
   LOG="$LOGS/$MODE-$REF-$VARIANT-$XTAG-$RT.log"; RES="$WT/result.txt"; rm -f "$RES"
+  ITERARGS=(); [ "$ITER" -gt 1 ] && ITERARGS=(-test-iterations "$ITER")  # xcodebuild rechaza -test-iterations 1
   TEST_RUNNER_RESULT_FILE="$RES" xcodebuild -project TabViewWithSideMenuWithViewModel.xcodeproj \
     -scheme TabViewWithSideMenuWithViewModel -destination "id=$UDID" -derivedDataPath "$WT/dd" \
-    -only-testing:$UIDIR/$ONLY -test-iterations "$ITER" test > "$LOG" 2>&1
+    -only-testing:$UIDIR/$ONLY ${ITERARGS[@]+"${ITERARGS[@]}"} test > "$LOG" 2>&1
   EXIT=$?
   PASS=$(grep -c "^Test Case .* passed" "$LOG"); FAIL=$(grep -c "^Test Case .* failed" "$LOG")
   DETAIL=""

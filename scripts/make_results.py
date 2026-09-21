@@ -29,9 +29,13 @@ p('Las mediciones las lanza `scripts/run_matrix.sh` (ver `scripts/run_all.sh` pa
   'cada celda se ejecuta en un worktree temporal de la ref indicada, sin commitear nada. Si una celda se midió varias veces, aquí sale la última.\n')
 
 # Toolchains
+def swift_short(r):  # las primeras mediciones guardaron también la línea de swift-driver
+    m = re.search(r'Apple Swift version .*', r['swift'])
+    return m.group(0) if m else r['swift']
+
 tool = collections.OrderedDict()
 for r in rows:
-    tool.setdefault((xcode_short(r), r['swift'], r['sdk']), []).append(r['fecha'])
+    tool.setdefault((xcode_short(r), swift_short(r), r['sdk']), []).append(r['fecha'])
 p('## Toolchains usadas\n')
 p('| Xcode | Swift | SDK | Fechas (primera – última medición) |')
 p('|---|---|---|---|')
@@ -94,6 +98,18 @@ if i:
                 cells.append('—' if not r else (parse(r['detalle']) if int(r['pasa']) else 'falla: ' + r['detalle'][:80]))
             p('| `%s` | ' % ref + ' | '.join(cells) + ' |')
         p('')
+
+# Celdas repetidas con resultados distintos (flakes)
+groups = collections.OrderedDict()
+for r in rows:
+    groups.setdefault((r['modo'], r['ref'], r['variante'], xcode_short(r), rt_key(r)), []).append(r)
+flaky = [(k, v) for k, v in groups.items() if len(v) > 1 and len({(x['pasa'], x['falla'], x['detalle']) for x in v}) > 1]
+if flaky:
+    p('## Celdas repetidas con resultados distintos\n')
+    p('Se muestra en las tablas la última medición; estas celdas dieron resultados diferentes entre repeticiones (test inestable):\n')
+    for k, v in flaky:
+        p('- `%s` %s %s iOS %s: ' % (k[1], k[2] if k[2] != '-' else '', k[3], k[4]) + '; '.join('pasa=%s falla=%s %s' % (x['pasa'], x['falla'], x['detalle'][:90]) for x in v))
+    p('')
 
 p('## Refs y commits medidos\n')
 refs = collections.OrderedDict()

@@ -63,8 +63,8 @@ Se muestra en las tablas la última medición; estas celdas dieron resultados di
 
 ## Refs y commits medidos
 
-- `v2-observable` = `2dc8276`
-- `v1-observableobject` = `8d32e3d`
-- `lazy-baseline-stateobject` = `ed95e23`
-- `lazy-state-classes` = `3569f05`
-- `lazy-state-experiment` = `3625582`
+- `v2-observable` = `823263f` (medido como `2dc8276`, antes de reescribir los mensajes; mismo árbol)
+- `v1-observableobject` = `0e7dd0f` (medido como `8d32e3d`, antes de reescribir los mensajes; mismo árbol)
+- `lazy-baseline-stateobject` = `01e4df1` (medido como `ed95e23`, antes de reescribir los mensajes; mismo árbol)
+- `lazy-state-classes` = `5842165` (medido como `3569f05`, antes de reescribir los mensajes; mismo árbol)
+- `lazy-state-experiment` = `93cd286` (medido como `3625582`, antes de reescribir los mensajes; mismo árbol)

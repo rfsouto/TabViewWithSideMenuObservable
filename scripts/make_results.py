@@ -4,6 +4,11 @@ import csv, re, collections
 
 rows = list(csv.DictReader(open('results/raw.tsv'), delimiter='\t'))
 
+# results/raw.tsv guarda el SHA que tenía cada ref al medir. Después se reescribieron los mensajes de commit
+# (para quitar una línea Co-Authored-By): mismos árboles, SHA nuevos. Se muestran los actuales.
+REWRITTEN = {'8d32e3d': '0e7dd0f', '2dc8276': '823263f', 'ed95e23': '01e4df1',
+             '3625582': '93cd286', '3569f05': '5842165'}
+
 def latest(rs, key):
     d = {}
     for r in rs:
@@ -116,5 +121,6 @@ refs = collections.OrderedDict()
 for r in rows:
     refs[(r['ref'], r['sha'])] = 1
 for ref, sha in refs:
-    p('- `%s` = `%s`' % (ref, sha))
+    now = REWRITTEN.get(sha)
+    p('- `%s` = `%s`' % (ref, now or sha) + (' (medido como `%s`, antes de reescribir los mensajes; mismo árbol)' % sha if now else ''))
 print('\n'.join(out))
